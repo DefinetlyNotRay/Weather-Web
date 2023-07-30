@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <title>Weater :D</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="script/script.js" defer></script>
+    <insert rel="stylesheet" href="styles/general.css"></insert>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://kit.fontawesome.com/b6a16ff751.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div class="container-box">   
+        <div class="Search-box"> 
+        <input placeholder="Enter Location" class="location-input" onkeydown="handleKeyDown(event)">
+        <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+            <div class="data">
+                <div class="current-data">
+                    <div class="data-details">
+                        <h2 class="location-name">_________</h2>
+                        <img class="img" id="myImage" src="">
+                        <p class="temperature">Temperature:</p>
+                        <p class="wind">Wind: <span></span></p>
+                        <p class="humidity">Humidity: <span></span></p>
+                        <button class="theme-button1" id="theme-button"><img class="imgSVG" id="toggle-night" src="svg/moon-regular.svg"></button>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
