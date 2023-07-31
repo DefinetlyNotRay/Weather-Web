@@ -1,13 +1,14 @@
 const inputCity = document.querySelector(".location-input");
 const searchBtn = document.querySelector(".search-button");
 const MainWeather = document.querySelector(".current-data");
-const temperature = document.querySelector('.temperature');
+const temperature = document.querySelector('.temperature span');
 const humidity = document.querySelector('.humidity span');
 const wind = document.querySelector('.wind span');
 const name1 = document.querySelector(".location-name");
 const myImage = document.getElementById("myImage");
 const iconToggle = document.getElementById("toggle-night");
 const themeBtn = document.getElementById("theme-button");
+const weatherTxt = document.querySelector(".weather__Txt");
 
 const API_KEY = "f41b98f79b5a6b404c03cf906efea727";
 
@@ -30,11 +31,6 @@ function toggleButton(){
 }
 
 
-
-
-
-
-
 const getWeatherDetails = (locationName, lat, lon) => {
     const WEATHER_APP_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
     const locationName1 = inputCity.value
@@ -43,12 +39,16 @@ const getWeatherDetails = (locationName, lat, lon) => {
         console.log(data)
         name1.textContent = `${locationName}`;
         myImage.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
-        temperature.textContent = `Temperature: ${(data.main.temp - 273.15).toFixed(2)}°C`;
+        weatherDescription =  data.weather[0].description;
+        weatherTxt.textContent = weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
+        temperature.textContent = `${(data.main.temp - 273.15).toFixed(2)}°C`;
         humidity.textContent = `${data.main.humidity}%`;
         wind.textContent = `${data.wind.speed} m/s`;
         
     }).catch(() =>  {
         alert("an error has occurd");
+        myImage.src = ``;
+
     })
 }
 
@@ -65,7 +65,7 @@ function getCityCoords() {
         if(!data.length) {
         name1.textContent = `_________`;
         myImage.src = ``;
-        temperature.textContent = `Temperature:`;
+        temperature.textContent = ``
         humidity.textContent = ``;
         wind.textContent = ``;
         }
