@@ -65,6 +65,7 @@ function getCityCoords() {
         if(!data.length) {
         name1.textContent = `_________`;
         myImage.src = ``;
+        weatherTxt.textContent = '';
         temperature.textContent = ``
         humidity.textContent = ``;
         wind.textContent = ``;

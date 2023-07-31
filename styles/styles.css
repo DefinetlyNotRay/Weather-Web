@@ -38,6 +38,7 @@ p{
 
 h2{
     margin-top: 10px;
+    margin-left: 5px;
     text-align: center;
 }
 
@@ -99,7 +100,7 @@ h2{
 
 
 
-img {
+.img-element {
 
     filter: drop-shadow(8px 5px 2px  lightgray); 
 }
