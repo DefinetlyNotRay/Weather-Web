@@ -11,6 +11,7 @@ const themeBtn = document.getElementById("theme-button");
 const weatherTxt = document.querySelector(".weather__Txt");
 
 const API_KEY = "f41b98f79b5a6b404c03cf906efea727";
+const DAILY_API = "7dd36adea4ef165d3e84d666f7c93083";
 
 let firstImage = true;
 
@@ -52,6 +53,14 @@ const getWeatherDetails = (locationName, lat, lon) => {
     })
 }
 
+const getHourlyDetails = (locationName, lat, lon) => {
+    const DAILY_WEATHER_URL = `https://api.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+    const locationName2 = inputCity.value
+    fetch(DAILY_WEATHER_URL).then(res => res.json()).then(data => {
+        console.log(data)
+    })
+}
+
 
 
 
@@ -79,6 +88,7 @@ function getCityCoords() {
 
 
 searchBtn.addEventListener("click", getCityCoords);
+searchBtn.addEventListener("click", getHourlyDetails);
 themeBtn.addEventListener("click",toggleButton)
 function handleKeyDown(event) {
     if(event.key === 'Enter') {
