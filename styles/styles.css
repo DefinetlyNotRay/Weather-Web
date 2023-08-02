@@ -13,7 +13,7 @@ body {
     align-items: center;
     height: 100%;
     margin: 0;
-    transition: var(--Transisiton);
+    transition: 0.25s ease-in;
 }
 
 :root{
@@ -21,7 +21,7 @@ body {
 }
 
 input{
-    outline: none;
+    border: none;
 }
 
 .container-box{
@@ -32,16 +32,17 @@ input{
     border-radius: 10px;
     position: relative;
     flex:1;
-    transition:  0.25s ease;
+   
     max-height: 94px;
     max-width: 590px;
     overflow: hidden;
-    transition:  1.5s ease;
+    transition:  1s ease-out;
 
 }
 
 
 .container-box.height{
+    transition:  1s ease-in;
     max-height: 5000px;
     overflow: auto;
 }
@@ -77,6 +78,10 @@ p{
 .Search-box{
     display: flex;
     justify-content: center;
+}
+
+input{
+    outline: none;
 }
 
 
@@ -199,10 +204,11 @@ body.night{
     /* padding: 30px; */
     border-radius: 10px;
     margin-bottom: 10px;
-    transition: var(--Transisiton);
+    transition: 0.5s ease-in-out;
 }
 
 .hourly__box.show{
+    transition: 1s ease-in;
     padding: 30px; 
     max-width: 1000px;
 }
@@ -247,10 +253,12 @@ body.night{
     margin-left: 30px;
     /* padding: 30px; */
     border-radius: 10px;
-    transition: var(--Transisiton);
+    transition: 0.5s ease-in-out;
+   
 }
 
 .daily__box.show{
+    transition: 1s ease-in;
     padding: 30px; 
     max-width: 1000px;
 }
