@@ -19,7 +19,7 @@
     <div class="container-box">   
         <div class="Search-box"> 
             <input placeholder="Enter Location" class="location-input" onkeydown="handleKeyDown(event)">
-            <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="search-button" onclick="dropDown()"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
             <div class="data">
                 <div class="current-data">
@@ -41,6 +41,8 @@
         </div>
     </div>
 
+
+<div class="dialy__hourly">
     <div class="hourly__daily">
         <div class="hourly__box">
             <h2>HOURLY FORECAST</h2>
@@ -68,12 +70,12 @@
             </div>
         </div>
     
-        <div class="hourly__box">
+        <div class="daily__box">
             <h2>DAILY FORECAST</h2>
-        <div class="hourly__data">
-                    <div class="hourly__datas">
-                        <div class="hourly__details">
-                            <div class="hourly__image"> 
+        <div class="daily__data">
+                    <div class="daily__datas">
+                        <div class="daily__details">
+                            <div class="daily__image"> 
                                 <img class="img-element1" id="myImage1" src="https://openweathermap.org/img/wn/10d@2x.png">
                                 
                                 <img class="img-element2" id="myImage2" src="https://openweathermap.org/img/wn/10d@2x.png">
@@ -81,7 +83,7 @@
                                 <img class="img-element4" id="myImage4" src="https://openweathermap.org/img/wn/10d@2x.png">
                                 <img class="img-element5" id="myImage5" src="https://openweathermap.org/img/wn/10d@2x.png">
                             </div>
-                        <div class="hourly">
+                        <div class="daily">
                             <p class="temperature"><span>50°C</span></p>
                             <p class="temperature"><span>50°C</span></p>
                             <p class="temperature"><span>50°C</span></p>
@@ -94,6 +96,8 @@
             </div>
         </div>
     </div>
+</div>
+    
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>

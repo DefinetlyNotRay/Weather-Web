@@ -9,6 +9,12 @@ const myImage = document.getElementById("myImage");
 const iconToggle = document.getElementById("toggle-night");
 const themeBtn = document.getElementById("theme-button");
 const weatherTxt = document.querySelector(".weather__Txt");
+const dataDetails = document.querySelector(".container-box");
+
+const dataHourly = document.querySelector(".hourly__box");
+const dataDaily= document.querySelector(".daily__box");
+const nightMode = document.querySelector(".imgSVG");
+
 
 const API_KEY = "f41b98f79b5a6b404c03cf906efea727";
 const DAILY_API = "7dd36adea4ef165d3e84d666f7c93083";
@@ -78,6 +84,10 @@ function getCityCoords() {
         temperature.textContent = ``
         humidity.textContent = ``;
         wind.textContent = ``;
+        dataDetails.classList.remove('height');
+        nightMode.style.display = "none";
+        dataDaily.classList.remove('show');
+        dataHourly.classList.remove('show');
         }
         const { name, lat, lon } = data[0]
         getWeatherDetails(name, lat, lon)
@@ -87,12 +97,25 @@ function getCityCoords() {
 }
 
 
+
+function dropDown(){
+    dataDaily.classList.add('show');
+    dataHourly.classList.add('show');
+    dataDetails.classList.add('height');
+    nightMode.style.display = "block";
+    
+}
+
+
 searchBtn.addEventListener("click", getCityCoords);
 searchBtn.addEventListener("click", getHourlyDetails);
 themeBtn.addEventListener("click",toggleButton)
+searchBtn.addEventListener("click", dropDown);
+
 function handleKeyDown(event) {
     if(event.key === 'Enter') {
     getCityCoords();
+    dropDown();
 }
 }
 
