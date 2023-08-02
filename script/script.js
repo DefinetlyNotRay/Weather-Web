@@ -15,7 +15,6 @@ const dataHourly = document.querySelector(".hourly__box");
 const dataDaily= document.querySelector(".daily__box");
 const nightMode = document.querySelector(".imgSVG");
 
-
 const API_KEY = "f41b98f79b5a6b404c03cf906efea727";
 const DAILY_API = "7dd36adea4ef165d3e84d666f7c93083";
 

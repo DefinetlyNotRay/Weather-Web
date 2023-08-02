@@ -32,12 +32,10 @@ input{
     border-radius: 10px;
     position: relative;
     flex:1;
-   
     max-height: 94px;
     max-width: 590px;
     overflow: hidden;
     transition:  1s ease-out;
-
 }
 
 
@@ -46,26 +44,6 @@ input{
     max-height: 5000px;
     overflow: auto;
 }
-
-
-
-
-/* .container-box{
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 10px;
-    position: relative;
-    transition: 1s ease-in;
-    flex:1;
-    height: 504.77px;
-    max-width: 590px;
-} */
-
-
-
-
 
 p{
     line-height: 20px;
@@ -241,14 +219,13 @@ body.night{
     justify-content: center;
 }
 .daily__box{
-   max-width: 0;
+    max-width: 0;
     overflow: hidden;
     background-color: white;
     margin-left: 30px;
     /* padding: 30px; */
     border-radius: 10px;
-    transition: 0.5s ease-in-out;
-   
+    transition: 0.5s ease-in-out;w                                                                                                                  
 }
 
 .daily__box.show{
