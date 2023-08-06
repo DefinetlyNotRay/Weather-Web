@@ -10,12 +10,13 @@ const iconToggle = document.getElementById("toggle-night");
 const themeBtn = document.getElementById("theme-button");
 const weatherTxt = document.querySelector(".weather__Txt");
 const dataDetails = document.querySelector(".container-box");
-
+const weatherDescription = document.querySelector(".weather__Txt");
 const dataHourly = document.querySelector(".hourly__box");
 const dataDaily = document.querySelector(".daily__box");
 const nightMode = document.querySelector(".imgSVG");
 
 const API_KEY = "f41b98f79b5a6b404c03cf906efea727";
+const API_KEY2 = "RL72T94M95NFUXT3A2YVPKC4P";
 const DAILY_API = "7dd36adea4ef165d3e84d666f7c93083";
 
 let firstImage = true;
@@ -36,36 +37,23 @@ function toggleButton() {
 }
 
 const getWeatherDetails = (locationName, lat, lon) => {
-  const WEATHER_APP_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+  const WEATHER_APP_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?key=${API_KEY2}&contentType=json `;
   const locationName1 = inputCity.value;
   fetch(WEATHER_APP_URL)
     .then((res) => res.json())
     .then((data) => {
+      
       // Update the weather details on the webpage
       console.log(data);
       name1.textContent = `${locationName}`;
-      myImage.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
-      weatherDescription = data.weather[0].description;
-      weatherTxt.textContent =
-        weatherDescription.charAt(0).toUpperCase() +
-        weatherDescription.slice(1);
-      temperature.textContent = `${(data.main.temp - 273.15).toFixed(2)}°C`;
-      humidity.textContent = `${data.main.humidity}%`;
-      wind.textContent = `${data.wind.speed} m/s`;
+      weatherDescription.textContent = data.currentConditions.conditions;
+      temperature.textContent = `${data.currentConditions.temp}°F`;
+      humidity.textContent = `${data.currentConditions.humidity}%`;
+      wind.textContent = `${data.currentConditions.windspeed} Km/s`;
     })
     .catch(() => {
       alert("an error has occurd");
       myImage.src = ``;
-    });
-};
-
-const getHourlyDetails = (locationName, lat, lon) => {
-  const DAILY_WEATHER_URL = `https://api.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-  const locationName2 = inputCity.value;
-  fetch(DAILY_WEATHER_URL)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
     });
 };
 
@@ -105,7 +93,7 @@ function dropDown() {
 }
 
 searchBtn.addEventListener("click", getCityCoords);
-searchBtn.addEventListener("click", getHourlyDetails);
+
 themeBtn.addEventListener("click", toggleButton);
 searchBtn.addEventListener("click", dropDown);
 
