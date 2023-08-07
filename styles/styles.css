@@ -6,7 +6,7 @@ html {
 }
 body {
   display: flex;
-  background-color: #add8e6;
+  background-color: #cdd8fe;
   justify-content: center;
   font-family: Roboto, Arial;
   display: flex;
@@ -42,11 +42,6 @@ input {
   transition: 1s ease-in;
   max-height: 5000px;
   overflow: auto;
-}
-
-p {
-  line-height: 20px;
-  margin-left: 5px;
 }
 
 .Search-box {
@@ -110,7 +105,7 @@ body.night {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: RGB(128, 128, 128);
+  background-color: #00040f;
   transition: 0.25s ease-in;
 }
 
@@ -217,6 +212,7 @@ body.night {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 13px;
 }
 
 .daily__image {
@@ -224,6 +220,7 @@ body.night {
   justify-content: space-around;
   align-items: center;
   max-width: 500px;
+  gap: 2px;
 }
 
 .daily__image img {
@@ -234,7 +231,6 @@ body.night {
 
 .daily span {
   text-align: center;
-  margin-right: 10px;
 }
 
 .days {
