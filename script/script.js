@@ -14,6 +14,18 @@ const weatherDescription = document.querySelector(".weather__Txt");
 const dataHourly = document.querySelector(".hourly__box");
 const dataDaily = document.querySelector(".daily__box");
 const nightMode = document.querySelector(".imgSVG");
+const dailyTemp = document.querySelectorAll(".temperature__daily span");
+const dailyImg = document.querySelectorAll(".img-daily");
+const dayElements = document.querySelectorAll(".day.one");
+const daysWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 const API_KEY = "f41b98f79b5a6b404c03cf906efea727";
 const API_KEY2 = "RL72T94M95NFUXT3A2YVPKC4P";
@@ -37,19 +49,45 @@ function toggleButton() {
 }
 
 const getWeatherDetails = (locationName, lat, lon) => {
-  const WEATHER_APP_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?key=${API_KEY2}&contentType=json `;
+  const WEATHER_APP_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?key=${API_KEY2}&unitGroup=metric&contentType=json `;
+
   const locationName1 = inputCity.value;
   fetch(WEATHER_APP_URL)
     .then((res) => res.json())
     .then((data) => {
-      
       // Update the weather details on the webpage
       console.log(data);
       name1.textContent = `${locationName}`;
+      myImage.src = `images/weather/${data.currentConditions.icon}.svg`;
       weatherDescription.textContent = data.currentConditions.conditions;
-      temperature.textContent = `${data.currentConditions.temp}°F`;
+      temperature.textContent = `${data.currentConditions.temp}°C`;
       humidity.textContent = `${data.currentConditions.humidity}%`;
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
+
+      // hourly
+      const yes = data.currentConditions.datetime.split(":");
+
+      if (yes[0] > 12) {
+        document.body.classList.toggle("night");
+      } else {
+        document.body.classList.toggle("body");
+      }
+      //daily stuff
+
+      data.days.slice(1, 6).forEach((element, index) => {
+        const indexCount = index + 1;
+        const icons = element.icon;
+        const temp = element.temp;
+        const hi = data.days[indexCount].datetime;
+        const d = new Date(hi);
+        const dayIndex = d.getDay();
+        const dayName = daysWeek[dayIndex];
+        console.log(icons);
+
+        dayElements[index].querySelector("span").textContent = dayName;
+        dailyImg[index].src = `images/weather/${icons}.svg`;
+        dailyTemp[index].textContent = `${temp}°C`;
+      });
     })
     .catch(() => {
       alert("an error has occurd");

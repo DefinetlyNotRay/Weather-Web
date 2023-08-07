@@ -127,11 +127,6 @@ body.night {
   align-items: center;
 }
 
-.data-details .container__image {
-  display: flex;
-  justify-content: center;
-}
-
 /* hourly box */
 .hourly__daily {
   display: flex;
@@ -196,6 +191,18 @@ body.night {
   transition: 0.5s ease-in-out;
 }
 
+.img-daily {
+  width: 100px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.img-element {
+  max-width: 200px;
+  margin: 2rem;
+  z-index: 100;
+}
+
 .daily__box.show {
   transition: 1s ease-in;
   padding: 30px;
@@ -228,4 +235,10 @@ body.night {
 .daily span {
   text-align: center;
   margin-right: 10px;
+}
+
+.days {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 1rem;
 }
