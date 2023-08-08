@@ -66,9 +66,9 @@ const getWeatherDetails = (locationName, lat, lon) => {
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
 
       // night mode and sun mode
-      const yes = data.currentConditions.datetime.split(":");
+      const currentTime = data.currentConditions.datetime.split(":");
 
-      if (yes[0] > 12) {
+      if (currentTime[0] > 12) {
         document.body.classList.toggle("night");
       } else {
         document.body.classList.toggle("body");
@@ -76,17 +76,15 @@ const getWeatherDetails = (locationName, lat, lon) => {
       console.log(yes);
 
       // hourly daily
-      data.days.forEach((hour, index) => {
-        const haa = data.days[0].hours[index].datetime.split(":");
+      data.days[0].hours.forEach((hourss, index) => {
+        const split = hourss.datetime.split(":");
 
-        if (yes[0] < haa[0]) {
-          const a = data.days[0].hours[index];
-          const hours = a.datetime;
-          console.log(hours);
-          console.log(index);
-        } else {
+        if (split > currentTime) {
+          hourl[index].querySelector("span").textContent = `${split[0]}`;
+          console.log(split);
         }
       });
+      console.log(currentTime);
 
       //daily stuff
 
