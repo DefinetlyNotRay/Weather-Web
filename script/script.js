@@ -73,16 +73,18 @@ const getWeatherDetails = (locationName, lat, lon) => {
       } else {
         document.body.classList.toggle("body");
       }
+      console.log(yes);
 
       // hourly daily
-      data.days.slice(0, 255).forEach((hour, index) => {
-        const a = data.days[0].hours[index];
-        const haa = a.datetime.split(":");
-        console.log(haa);
-        if (yes < haa) {
+      data.days.forEach((hour, index) => {
+        const haa = data.days[0].hours[index].datetime.split(":");
+
+        if (yes[0] < haa[0]) {
+          const a = data.days[0].hours[index];
           const hours = a.datetime;
           console.log(hours);
           console.log(index);
+        } else {
         }
       });
 
