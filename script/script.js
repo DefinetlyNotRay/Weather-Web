@@ -17,6 +17,7 @@ const nightMode = document.querySelector(".imgSVG");
 const dailyTemp = document.querySelectorAll(".temperature__daily span");
 const dailyImg = document.querySelectorAll(".img-daily");
 const dayElements = document.querySelectorAll(".day.one");
+const hourl = document.querySelectorAll(".idkss.one");
 const daysWeek = [
   "Sunday",
   "Monday",
@@ -64,7 +65,7 @@ const getWeatherDetails = (locationName, lat, lon) => {
       humidity.textContent = `${data.currentConditions.humidity}%`;
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
 
-      // hourly
+      // night mode and sun mode
       const yes = data.currentConditions.datetime.split(":");
 
       if (yes[0] > 12) {
@@ -72,6 +73,19 @@ const getWeatherDetails = (locationName, lat, lon) => {
       } else {
         document.body.classList.toggle("body");
       }
+
+      // hourly daily
+      data.days.slice(0, 255).forEach((hour, index) => {
+        const a = data.days[0].hours[index];
+        const haa = a.datetime.split(":");
+        console.log(haa);
+        if (yes < haa) {
+          const hours = a.datetime;
+          console.log(hours);
+          console.log(index);
+        }
+      });
+
       //daily stuff
 
       data.days.slice(1, 6).forEach((element, index) => {
@@ -82,7 +96,6 @@ const getWeatherDetails = (locationName, lat, lon) => {
         const d = new Date(hi);
         const dayIndex = d.getDay();
         const dayName = daysWeek[dayIndex];
-        console.log(icons);
 
         dayElements[index].querySelector("span").textContent = dayName;
         dailyImg[index].src = `images/weather/${icons}.svg`;
