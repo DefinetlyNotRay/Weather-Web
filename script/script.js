@@ -66,25 +66,51 @@ const getWeatherDetails = (locationName, lat, lon) => {
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
 
       // night mode and sun mode
-      const currentTime = data.currentConditions.datetime.split(":");
+      const yes = data.currentConditions.datetime.split(":");
 
-      if (currentTime[0] > 12) {
+      if (yes[0] > 12) {
         document.body.classList.toggle("night");
       } else {
-        document.body.classList.toggle("body");
+        document.body.classList.remove("night");
       }
       console.log(yes);
 
       // hourly daily
-      data.days[0].hours.forEach((hourss, index) => {
-        const split = hourss.datetime.split(":");
 
-        if (split > currentTime) {
-          hourl[index].querySelector("span").textContent = `${split[0]}`;
-          console.log(split);
+      const currentHour = parseInt(
+        data.currentConditions.datetime.split(":")[0],
+        10
+      ); // Extract hour from datetime
+      const firstDayHours = data.days[0].hours;
+      const hoursAfterCurrent = firstDayHours.slice(currentHour + 1);
+
+      const dateTimeArray = hoursAfterCurrent.map((hour) => hour.datetime);
+      const dateTemp = hoursAfterCurrent.map((hour) => hour.temp);
+      const dateIcon = hoursAfterCurrent.map((hour) => hour.icon);
+      const hourElements = document.querySelectorAll(".idkss");
+      const tempElements = document.querySelectorAll(".temperature");
+      const imageElements = document.querySelectorAll(".img_element");
+
+      imageElements.forEach((imageElement, index) => {
+        // Set the src attribute for the current image element
+        imageElement.src = `images/weather/${dateIcon[index]}.svg`;
+      });
+
+      tempElements.forEach((tempElement, index) => {
+        const tempSpan = tempElement.querySelector("span");
+        if (tempSpan) {
+          tempSpan.textContent = `${dateTemp[index]}°C` || "";
         }
       });
-      console.log(currentTime);
+
+      hourElements.forEach((hourElement, index) => {
+        const spanElement = hourElement.querySelector("span");
+        if (spanElement) {
+          spanElement.textContent = dateTimeArray[index] || "";
+        }
+      });
+
+      console.log("Temperature values after current hour:", dateTemp);
 
       //daily stuff
 
@@ -127,6 +153,7 @@ function getCityCoords() {
         nightMode.style.display = "none";
         dataDaily.classList.remove("show");
         dataHourly.classList.remove("show");
+        document.body.classList.remove("night");
       }
       const { name, lat, lon } = data[0];
       getWeatherDetails(name, lat, lon);
