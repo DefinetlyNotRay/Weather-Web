@@ -1,0 +1,14 @@
+{
+  "name": "weather-web",
+  "version": "1.0.0",
+  "description": "PSL HELP",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
