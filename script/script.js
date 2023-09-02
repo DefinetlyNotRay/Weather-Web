@@ -49,7 +49,7 @@ function toggleButton() {
   firstImage = !firstImage;
 }
 
-const getWeatherDetails = (locationName, lat, lon) => {
+const getWeatherDetails = async (locationName, lat, lon) => {
   const WEATHER_APP_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?key=${API_KEY2}&unitGroup=metric&contentType=json `;
 
   const locationName1 = inputCity.value;
