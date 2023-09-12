@@ -48,6 +48,37 @@ function toggleButton() {
   }
   firstImage = !firstImage;
 }
+function sendLocationToBackend(locationName) {
+  const xhr = new XMLHttpRequest();
+  const url = "../backend/get-location.php";
+  const params = `location=${encodeURIComponent(locationName)}`;
+
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          console.log("Location saved successfully.");
+        } else {
+          console.error("Failed to save location.");
+        }
+      } else {
+        console.error("Error sending request. Status: " + xhr.status);
+      }
+    }
+  };
+
+  xhr.send(params);
+}
+
+// Inside the getWeatherDetails function, after you get the locationName:
+const locationName = inputCity.value.trim();
+if (!inputCity) {
+  alert("not a real city");
+}
 
 const getWeatherDetails = async (locationName, lat, lon) => {
   const WEATHER_APP_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?key=${API_KEY2}&unitGroup=metric&contentType=json `;
@@ -82,7 +113,16 @@ const getWeatherDetails = async (locationName, lat, lon) => {
         10
       ); // Extract hour from datetime
       const firstDayHours = data.days[0].hours;
-      const hoursAfterCurrent = firstDayHours.slice(currentHour + 1);
+
+      // Define a variable to keep track of the current day index
+      let currentDayIndex = 0;
+
+      // Concatenate data from all days' hours
+      const allHoursData = data.days.reduce((accumulator, day) => {
+        return accumulator.concat(day.hours);
+      }, []);
+
+      const hoursAfterCurrent = allHoursData.slice(currentHour);
 
       const dateTimeArray = hoursAfterCurrent.map((hour) => hour.datetime);
       const dateTemp = hoursAfterCurrent.map((hour) => hour.temp);
@@ -110,6 +150,11 @@ const getWeatherDetails = async (locationName, lat, lon) => {
         }
       });
 
+      // Check if we need to switch to the next day's data
+      if (currentHour + dateTimeArray.length >= allHoursData.length) {
+        currentDayIndex++;
+      }
+
       console.log("Temperature values after current hour:", dateTemp);
 
       //daily stuff
@@ -136,8 +181,10 @@ const getWeatherDetails = async (locationName, lat, lon) => {
 
 function getCityCoords() {
   const locationName = inputCity.value.trim();
+  console.log(locationName);
   if (!inputCity) return;
   const API_GEOCODING_KEY = `http://api.openweathermap.org/geo/1.0/direct?q=${locationName},&limit=1&appid=${API_KEY}`;
+  sendLocationToBackend(locationName);
 
   fetch(API_GEOCODING_KEY)
     .then((res) => res.json())
@@ -159,7 +206,7 @@ function getCityCoords() {
       getWeatherDetails(name, lat, lon);
     })
     .catch(() => {
-      alert("an error has occurd");
+      alert("City not valid");
     });
 }
 
