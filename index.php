@@ -1,3 +1,5 @@
+<?php require 'connection.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +19,12 @@
 <body>
 
     <div class="container-box">   
-        <div class="Search-box"> 
-            <input placeholder="Enter Location" class="location-input" onkeydown="handleKeyDown(event)">
-            <button class="search-button" onclick="dropDown()"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+        <form  method="get">
+            <div class="Search-box"> 
+                <input placeholder="Enter Location" class="location-input" onkeydown="handleKeyDown(event)">
+                <button class="search-button" onclick="dropDown()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
             <div class="data">
                 <div class="current-data">
                     <div class="data-details">
@@ -110,5 +114,7 @@
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    
 </body>
 </html>
