@@ -48,36 +48,23 @@ function toggleButton() {
   }
   firstImage = !firstImage;
 }
-function sendLocationToBackend(locationName) {
-  const xhr = new XMLHttpRequest();
-  const url = "../backend/get-location.php";
-  const params = `location=${encodeURIComponent(locationName)}`;
-
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        if (response.success) {
-          console.log("Location saved successfully.");
-        } else {
-          console.error("Failed to save location.");
-        }
-      } else {
-        console.error("Error sending request. Status: " + xhr.status);
-      }
-    }
-  };
-
-  xhr.send(params);
-}
 
 // Inside the getWeatherDetails function, after you get the locationName:
 const locationName = inputCity.value.trim();
 if (!inputCity) {
   alert("not a real city");
+}
+
+function sendLocationToBackend(locationName) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "connection.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      console.log(xhr.responseText); // You can use this to debug the response
+    }
+  };
+  xhr.send("location_name=" + locationName);
 }
 
 const getWeatherDetails = async (locationName, lat, lon) => {
