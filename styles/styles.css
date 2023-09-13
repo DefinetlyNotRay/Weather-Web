@@ -4,9 +4,18 @@ html {
   align-items: center;
   height: 100%;
 }
+
+:root {
+  --Transisiton: 0.5s ease-in;
+  --primary-color: #cdd8fe;
+  --secondary-color: #ffffff;
+  --accent-color: #add8e6;
+  --night-mode: #00040f;
+}
+
 body {
   display: flex;
-  background-color: #cdd8fe;
+  background-color: var(--primary-color);
   justify-content: center;
   font-family: Roboto, Arial;
   display: flex;
@@ -14,10 +23,6 @@ body {
   height: 100%;
   margin: 0;
   transition: 0.25s ease-in;
-}
-
-:root {
-  --Transisiton: 0.5s ease-in;
 }
 
 input {
@@ -28,7 +33,7 @@ input {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: var(--secondary-color);
   border-radius: 10px;
   position: relative;
   flex: 1;
@@ -54,7 +59,7 @@ input {
 }
 
 .search-button {
-  background-color: lightblue;
+  background-color: var(--accent-color);
   border: none;
   cursor: pointer;
   border-radius: 20px;
@@ -105,7 +110,7 @@ body.night {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00040f;
+  background-color: var(--night-mode);
   transition: 0.25s ease-in;
 }
 
@@ -132,7 +137,7 @@ body.night {
 .hourly__box {
   max-width: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: var(--secondary-color);
   margin-left: 30px;
   /* padding: 30px; */
   border-radius: 10px;
@@ -179,7 +184,7 @@ body.night {
 .daily__box {
   max-width: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: var(--secondary-color);
   margin-left: 30px;
   /* padding: 30px; */
   border-radius: 10px;
@@ -236,7 +241,6 @@ body.night {
 .days {
   display: flex;
   justify-content: space-around;
-  margin-right: 1rem;
 }
 
 .img_element.daily {
