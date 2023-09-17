@@ -36,7 +36,7 @@ let firstImage = true;
 
 function toggleButton() {
   if (firstImage) {
-    document.body.classList.toggle("night");
+    document.body.classList.toggle("dark");
     document.body.classList.toggle(".search-button");
     iconToggle.src = "svg/sun-regular.svg";
     document.body.classList.toggle("body");
@@ -44,7 +44,7 @@ function toggleButton() {
     document.body.classList.toggle("body");
     document.body.classList.toggle(".search-button");
     iconToggle.src = "svg/moon-regular.svg";
-    document.body.classList.toggle("night");
+    document.body.classList.toggle("dark");
   }
   firstImage = !firstImage;
 }
@@ -61,7 +61,7 @@ function sendLocationToBackend(locationName) {
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
-      console.log(xhr.responseText); // You can use this to debug the response
+      console.log(xhr.responseText);
     }
   };
   xhr.send("location_name=" + locationName);
@@ -86,12 +86,25 @@ const getWeatherDetails = async (locationName, lat, lon) => {
       // night mode and sun mode
       const yes = data.currentConditions.datetime.split(":");
 
-      if (yes[0] > 12) {
+      if (yes[0] > 12 && yes[0] < 17) {
+        document.body.classList.toggle("afternoon");
+      } else if (yes[0] > 17 && yes[0] < 0) {
         document.body.classList.toggle("night");
-      } else {
+        document.body.classList.remove("afternoon");
         document.body.classList.remove("night");
+        document.body.classList.remove("noon");
+      } else if (yes[0] < 12) {
+        document.body.classList.toggle("morning");
+        document.body.classList.remove("afternoon");
+        document.body.classList.remove("night");
+        document.body.classList.remove("noon");
+      } else {
+        document.body.classList.remove("morning");
+        document.body.classList.remove("afternoon");
+        document.body.classList.remove("night");
+        document.body.classList.remove("noon");
       }
-      console.log(yes);
+      console.log(yes[0]);
 
       // hourly daily
 

@@ -16,13 +16,14 @@ html {
 body {
   display: flex;
   background-color: var(--primary-color);
+  background: var(--primary-color);
   justify-content: center;
   font-family: Roboto, Arial;
   display: flex;
   align-items: center;
   height: 100%;
   margin: 0;
-  transition: 0.25s ease-in;
+  transition: all 0.25s ease-in;
 }
 
 input {
@@ -106,7 +107,7 @@ h1 {
   background-color: transparent;
 }
 
-body.night {
+body.dark {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,11 +115,38 @@ body.night {
   transition: 0.25s ease-in;
 }
 
+body.night {
+  background: linear-gradient(
+    108deg,
+    #404040 1.87%,
+    #131313 117.86%,
+    #000 179.26%
+  );
+  transition: 0.25s ease-in;
+}
+
+body.morning {
+  background: linear-gradient(108deg, #9ccdfa 1.87%, #fff 179.26%);
+  transition: 0.25s ease-in;
+}
+
+body.afternoon {
+  background: linear-gradient(
+    108deg,
+    #ffe9bd 0%,
+    rgba(255, 190, 82, 0.69) 55.09%,
+    rgba(255, 206, 130, 0.52) 86.83%,
+    rgba(250, 151, 0, 0.3) 126.04%,
+    rgba(255, 162, 21, 0.11) 159.65%,
+    rgba(255, 153, 0, 0) 179.26%
+  );
+  transition: 0.25s ease-in;
+}
+
 .imgSVG {
   display: none;
-  width: 25px;
-  height: 25px;
-  z-index: 100;
+  width: 24px;
+  aspect-ratio: 1/1;
 }
 
 .data-details {
