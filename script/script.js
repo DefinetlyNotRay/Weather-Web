@@ -210,6 +210,8 @@ function getCityCoords() {
     });
 }
 
+console.log(getCityCoords);
+
 function dropDown() {
   dataDaily.classList.add("show");
   dataHourly.classList.add("show");
