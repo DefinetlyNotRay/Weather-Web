@@ -228,6 +228,6 @@ function handleKeyDown(event) {
   if (event.key === "Enter") {
     getCityCoords();
     dropDown();
-    redis.set("hi", "jhi");
+    redis.set("hello", "world");
   }
 }
