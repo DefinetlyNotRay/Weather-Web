@@ -84,27 +84,28 @@ const getWeatherDetails = async (locationName, lat, lon) => {
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
 
       // night mode and sun mode
-      const yes = data.currentConditions.datetime.split(":");
+      const Time = data.currentConditions.datetime.split(":");
 
-      if (yes[0] > 12 && yes[0] < 17) {
-        document.body.classList.toggle("afternoon");
-      } else if (yes[0] > 17 && yes[0] < 0) {
-        document.body.classList.toggle("night");
-        document.body.classList.remove("afternoon");
+      if (Time[0] >= 12 && Time[0] < 17) {
+        // It's afternoon
+        document.body.classList.add("afternoon");
         document.body.classList.remove("night");
-        document.body.classList.remove("noon");
-      } else if (yes[0] < 12) {
-        document.body.classList.toggle("morning");
-        document.body.classList.remove("afternoon");
-        document.body.classList.remove("night");
-        document.body.classList.remove("noon");
-      } else {
         document.body.classList.remove("morning");
+      } else if (Time[0] >= 17) {
+        // It's night
+        document.body.classList.add("night");
+        document.body.classList.remove("afternoon");
+        document.body.classList.remove("morning");
+      } else if (Time[0] < 12) {
+        // It's morning
+        document.body.classList.add("morning");
         document.body.classList.remove("afternoon");
         document.body.classList.remove("night");
-        document.body.classList.remove("noon");
+      } else {
+        // None of the conditions matched (this is unexpected)
+        console.log("failed");
       }
-      console.log(yes[0]);
+      console.log(Time[0]);
 
       // hourly daily
 
