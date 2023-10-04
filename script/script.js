@@ -18,6 +18,8 @@ const dailyTemp = document.querySelectorAll(".temperature__daily span");
 const dailyImg = document.querySelectorAll(".img-daily");
 const dayElements = document.querySelectorAll(".day.one");
 const hourl = document.querySelectorAll(".idkss.one");
+import { redis } from "redis.js";
+
 const daysWeek = [
   "Sunday",
   "Monday",
@@ -210,8 +212,6 @@ function getCityCoords() {
     });
 }
 
-console.log(getCityCoords);
-
 function dropDown() {
   dataDaily.classList.add("show");
   dataHourly.classList.add("show");
@@ -228,5 +228,6 @@ function handleKeyDown(event) {
   if (event.key === "Enter") {
     getCityCoords();
     dropDown();
+    redis.set("hello", "world");
   }
 }
