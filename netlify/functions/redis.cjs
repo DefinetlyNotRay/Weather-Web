@@ -2,7 +2,7 @@ const Redis = require("ioredis");
 let counter = 1;
 exports.handler = async function (event) {
   const body = JSON.parse(event.body);
-  const locationInput = body.locationInput;
+  const locationInput = body.locationName;
 
   const redis = new Redis({
     host: "ideal-bluejay-31039.upstash.io",
