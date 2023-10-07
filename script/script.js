@@ -225,13 +225,6 @@ searchBtn.addEventListener("click", getCityCoords);
 themeBtn.addEventListener("click", toggleButton);
 searchBtn.addEventListener("click", dropDown);
 
-function handleKeyDown(event) {
-  if (event.key === "Enter") {
-    getCityCoords();
-    dropDown();
-  }
-}
-
 function red() {
   let locationInput = document.querySelector(".location-input").value;
   let index = 1;
@@ -255,8 +248,8 @@ searchBtn.addEventListener("click", red);
 
 function handleKeyDown(event) {
   if (event.key === "Enter") {
+    getCityCoords();
+    dropDown();
     red();
   }
 }
-
-document.addEventListener("keydown", handleKeyDown);
