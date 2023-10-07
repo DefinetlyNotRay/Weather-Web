@@ -1,12 +1,13 @@
 const Redis = require("ioredis");
-const fetch = require("node-fetch");
 
 exports.handler = async function (event) {
   const body = JSON.parse(event.body);
   const locationInput = body.locationInput;
 
   const redis = new Redis({
-    host: "redis://default:8d1efb4c8a1f4202a56a4a04bef43f89@ideal-bluejay-31039.upstash.io:31039",
+    host: "ideal-bluejay-31039.upstash.io",
+    port: 31039,
+    password: "8d1efb4c8a1f4202a56a4a04bef43f89",
   });
 
   try {

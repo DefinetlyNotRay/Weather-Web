@@ -226,8 +226,7 @@ themeBtn.addEventListener("click", toggleButton);
 searchBtn.addEventListener("click", dropDown);
 
 function red() {
-  let locationInput = document.querySelector(".location-input").value;
-  let index = 1;
+  const locationInput = document.querySelector(".location-input").value;
 
   fetch("/.netlify/functions/redis", {
     method: "POST",
