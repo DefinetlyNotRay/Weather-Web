@@ -6,8 +6,10 @@ exports.handler = async function (event) {
     };
   }
 
-  const body = JSON.parse(event.body);
+  console.log(event);
 
+  const body = JSON.parse(event.body);
+  console.log(event.body);
   const locationInput = body.locationInput;
 
   const UPSTASH_API_KEY = "42808d40-2adf-4b76-b850-1e143ab417c8="; // Replace with your Upstash API key
