@@ -12,7 +12,7 @@ exports.handler = async function (event) {
 
   try {
     // const id = counter++; // Get the current ID and increment it for the next call
-    const key = `location:${Math.random()}`;
+    const key = `location:${Math.floor(Math.random() * 10000 + 1)}`;
     await redis.set(key, locationInput);
     await redis.quit();
 
