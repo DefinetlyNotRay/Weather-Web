@@ -229,14 +229,12 @@ function red() {
   let locationInput = document.querySelector(".location-input").value;
   let index = 1;
 
-  console.log(locationInput);
-
   fetch("/.netlify/functions/redis", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ locationInput, index }),
+    body: JSON.stringify({ locationInput }),
   })
     .then((response) => response.json())
     .then((data) => console.log(data))
