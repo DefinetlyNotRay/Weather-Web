@@ -1,5 +1,5 @@
 const Redis = require("ioredis");
-
+let counter = 1;
 exports.handler = async function (event) {
   const body = JSON.parse(event.body);
   const locationInput = body.locationInput;
@@ -11,7 +11,7 @@ exports.handler = async function (event) {
   });
 
   try {
-    await redis.set("location", locationInput);
+    await redis.set(`location:${counter++}`, locationInput);
     await redis.quit();
 
     return {
