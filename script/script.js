@@ -55,18 +55,6 @@ if (!inputCity) {
   alert("not a real city");
 }
 
-function sendLocationToBackend(locationName) {
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "connection.php", true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      console.log(xhr.responseText);
-    }
-  };
-  xhr.send("location_name=" + locationName);
-}
-
 const getWeatherDetails = async (locationName, lat, lon) => {
   const WEATHER_APP_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?key=${API_KEY2}&unitGroup=metric&contentType=json `;
 
