@@ -231,3 +231,30 @@ function handleKeyDown(event) {
     dropDown();
   }
 }
+
+function red() {
+  let locationInput = document.querySelector(".location-input").value;
+  let index = 1;
+
+  console.log(locationInput);
+
+  fetch("/.netlify/functions/redis", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ locationInput, index }),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error("Error:", error));
+}
+
+themeBtn.addEventListener("click", red);
+searchBtn.addEventListener("click", red);
+
+function handleKeyDown(event) {
+  if (event.key === "Enter") {
+    red();
+  }
+}
