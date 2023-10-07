@@ -238,7 +238,7 @@ function red() {
 
   console.log(locationInput);
 
-  fetch("/.netlify/functions/redis", {
+  fetch("/.netlify/functions/redis.js", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
