@@ -71,6 +71,18 @@ const getWeatherDetails = async (locationName, lat, lon) => {
       humidity.textContent = `${data.currentConditions.humidity}%`;
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
 
+      //databaase post
+      fetch("/.netlify/functions/redis", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ locationName }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error("Error:", error));
+
       // night mode and sun mode
       const Time = data.currentConditions.datetime.split(":");
 
@@ -173,7 +185,6 @@ function getCityCoords() {
   console.log(locationName);
   if (!inputCity) return;
   const API_GEOCODING_KEY = `http://api.openweathermap.org/geo/1.0/direct?q=${locationName},&limit=1&appid=${API_KEY}`;
-  sendLocationToBackend(locationName);
 
   fetch(API_GEOCODING_KEY)
     .then((res) => res.json())
@@ -213,28 +224,16 @@ searchBtn.addEventListener("click", getCityCoords);
 themeBtn.addEventListener("click", toggleButton);
 searchBtn.addEventListener("click", dropDown);
 
-function red() {
-  const locationInput = document.querySelector(".location-input").value;
+// function red() {
+//   const locationInput = document.querySelector(".location-input").value;
+// }
 
-  fetch("/.netlify/functions/redis", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ locationInput }),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error("Error:", error));
-}
-
-themeBtn.addEventListener("click", red);
-searchBtn.addEventListener("click", red);
+// themeBtn.addEventListener("click", red);
+// searchBtn.addEventListener("click", red);
 
 function handleKeyDown(event) {
   if (event.key === "Enter") {
     getCityCoords();
     dropDown();
-    red();
   }
 }
