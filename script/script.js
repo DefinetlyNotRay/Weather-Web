@@ -252,8 +252,11 @@ function red() {
 
 themeBtn.addEventListener("click", red);
 searchBtn.addEventListener("click", red);
+
 function handleKeyDown(event) {
   if (event.key === "Enter") {
     red();
   }
 }
+
+document.addEventListener("keydown", handleKeyDown);
