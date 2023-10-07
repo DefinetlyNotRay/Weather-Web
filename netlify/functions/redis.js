@@ -3,7 +3,7 @@ exports.handler = async function (event) {
   const locationInput = body.locationInput;
 
   const UPSTASH_API_KEY = "42808d40-2adf-4b76-b850-1e143ab417c8="; // Replace with your Upstash API key
-  const UPSTASH_URL = "https://ideal-bluejay-31039.upstash.io";
+  const UPSTASH_URL = "ideal-bluejay-31039.upstash.io";
 
   const response = await fetch(UPSTASH_URL, {
     method: "POST",
