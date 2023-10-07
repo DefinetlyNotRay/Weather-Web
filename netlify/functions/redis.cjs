@@ -1,3 +1,6 @@
+const fetch = require("node-fetch");
+const Redis = require("ioredis");
+
 exports.handler = async function (event) {
   if (!event.body) {
     return {
@@ -6,37 +9,27 @@ exports.handler = async function (event) {
     };
   }
 
-  console.log(event);
-
   const body = JSON.parse(event.body);
   const locationInput = body.locationInput;
 
-  const UPSTASH_API_KEY = "42808d40-2adf-4b76-b850-1e143ab417c8="; // Replace with your Upstash API key
-  const UPSTASH_URL =
-    "redis://default:8d1efb4c8a1f4202a56a4a04bef43f89@ideal-bluejay-31039.upstash.io:31039";
-
-  console.log("UPSTASH_URL:", UPSTASH_URL);
-  console.log("UPSTASH_API_KEY:", UPSTASH_API_KEY);
-  console.log("locationInput:", locationInput);
-
-  const response = await fetch(UPSTASH_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${UPSTASH_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ location: locationInput }),
+  const redis = new Redis({
+    host: "ideal-bluejay-31039.upstash.io",
+    port: 31039,
+    password: "8d1efb4c8a1f4202a56a4a04bef43f89",
   });
 
-  if (!response.ok) {
+  try {
+    await redis.set("location", locationInput);
+    await redis.quit();
+
     return {
-      statusCode: response.status,
+      statusCode: 200,
+      body: JSON.stringify({ message: "Data stored successfully" }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
       body: JSON.stringify({ message: "Error storing data" }),
     };
   }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: "Data stored successfully" }),
-  };
 };
