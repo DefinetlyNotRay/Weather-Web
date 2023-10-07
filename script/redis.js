@@ -1,4 +1,4 @@
-import Redis from "ioredis";
+import Redis from "/ioredis";
 
 const redis = new Redis({
   host: "ideal-bluejay-31039.upstash.io",
