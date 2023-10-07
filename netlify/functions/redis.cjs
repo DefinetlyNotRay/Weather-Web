@@ -11,7 +11,9 @@ exports.handler = async function (event) {
   });
 
   try {
-    await redis.set(`location:${counter++}`, locationInput);
+    const id = counter++; // Get the current ID and increment it for the next call
+    const key = `location:${id}`;
+    await redis.set(key, locationInput);
     await redis.quit();
 
     return {
