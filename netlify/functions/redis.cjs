@@ -36,3 +36,7 @@ exports.handler = async function (event) {
     body: JSON.stringify({ message: "Data stored successfully" }),
   };
 };
+
+console.log("UPSTASH_URL:", UPSTASH_URL);
+console.log("UPSTASH_API_KEY:", UPSTASH_API_KEY);
+console.log("locationInput:", locationInput);
