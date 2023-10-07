@@ -238,7 +238,7 @@ function red() {
 
   console.log(locationInput);
 
-  fetch("/netlify/functions/redis", {
+  fetch("/.netlify/functions/redis", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -252,7 +252,6 @@ function red() {
 
 themeBtn.addEventListener("click", red);
 searchBtn.addEventListener("click", red);
-
 function handleKeyDown(event) {
   if (event.key === "Enter") {
     red();
