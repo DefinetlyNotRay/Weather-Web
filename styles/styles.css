@@ -29,6 +29,9 @@ body {
 input {
   border: none;
 }
+.containerss {
+  display: flex;
+}
 
 .container-box {
   padding: 30px;
@@ -84,6 +87,11 @@ input {
   }
 }
 
+@media (max-width: 1200px) {
+  .containerss {
+  }
+}
+
 @media (max-width: 300px) {
   .location-input {
     width: 60%;
@@ -105,14 +113,6 @@ h1 {
   right: 10px;
   border: none;
   background-color: transparent;
-}
-
-body.dark {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--night-mode);
-  transition: 0.25s ease-in;
 }
 
 body.night {
@@ -140,6 +140,14 @@ body.afternoon {
     rgba(255, 162, 21, 0.11) 159.65%,
     rgba(255, 153, 0, 0) 179.26%
   );
+  transition: 0.25s ease-in;
+}
+
+body.dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--night-mode) !important;
   transition: 0.25s ease-in;
 }
 

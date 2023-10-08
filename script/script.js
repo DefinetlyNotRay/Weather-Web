@@ -37,12 +37,11 @@ let firstImage = true;
 function toggleButton() {
   if (firstImage) {
     document.body.classList.toggle("dark");
-    document.body.classList.toggle(".search-button");
     iconToggle.src = "svg/sun-regular.svg";
-    document.body.classList.toggle("body");
+    document.body.classList.remove("morning");
+    document.body.classList.remove("afternoon");
+    document.body.classList.remove("night");
   } else {
-    document.body.classList.toggle("body");
-    document.body.classList.toggle(".search-button");
     iconToggle.src = "svg/moon-regular.svg";
     document.body.classList.toggle("dark");
   }
@@ -71,17 +70,17 @@ const getWeatherDetails = async (locationName, lat, lon) => {
       humidity.textContent = `${data.currentConditions.humidity}%`;
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
 
-      //databaase post
-      fetch("/.netlify/functions/redis", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ locationName }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Error:", error));
+      // //databaase post
+      // fetch("/.netlify/functions/redis", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ locationName }),
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => console.log(data))
+      //   .catch((error) => console.error("Error:", error));
 
       // night mode and sun mode
       const Time = data.currentConditions.datetime.split(":");
