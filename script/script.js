@@ -2,6 +2,7 @@ const inputCity = document.querySelector(".location-input");
 const searchBtn = document.querySelector(".search-button");
 const MainWeather = document.querySelector(".current-data");
 const temperature = document.querySelector(".temperature span");
+const temp = document.querySelector(".temp");
 const humidity = document.querySelector(".humidity span");
 const wind = document.querySelector(".wind span");
 const name1 = document.querySelector(".location-name");
@@ -14,10 +15,14 @@ const weatherDescription = document.querySelector(".weather__Txt");
 const dataHourly = document.querySelector(".hourly__box");
 const dataDaily = document.querySelector(".daily__box");
 const nightMode = document.querySelector(".imgSVG");
-const dailyTemp = document.querySelectorAll(".temperature__daily span");
+const dailyTemp = document.querySelectorAll(".plswork ");
 const dailyImg = document.querySelectorAll(".img-daily");
 const dayElements = document.querySelectorAll(".day.one");
 const hourl = document.querySelectorAll(".idkss.one");
+const tempIcon = document.querySelector(".temp__icon");
+const tempElements = document.querySelectorAll(".temp__hourly");
+const tempDailyElements = document.querySelectorAll(".temp__dailies");
+
 const daysWeek = [
   "Sunday",
   "Monday",
@@ -53,11 +58,13 @@ const locationName = inputCity.value.trim();
 if (!inputCity) {
   alert("not a real city");
 }
+const tempButton = document.querySelector(".temp__button");
 
 const getWeatherDetails = async (locationName, lat, lon) => {
   const WEATHER_APP_URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?key=${API_KEY2}&unitGroup=metric&contentType=json `;
 
   const locationName1 = inputCity.value;
+
   fetch(WEATHER_APP_URL)
     .then((res) => res.json())
     .then((data) => {
@@ -66,21 +73,22 @@ const getWeatherDetails = async (locationName, lat, lon) => {
       name1.textContent = `${locationName}`;
       myImage.src = `images/weather/${data.currentConditions.icon}.svg`;
       weatherDescription.textContent = data.currentConditions.conditions;
-      temperature.textContent = `${data.currentConditions.temp}°C`;
+      temp.textContent = `${data.currentConditions.temp}`;
+      tempIcon.textContent = ` °C`;
       humidity.textContent = `${data.currentConditions.humidity}%`;
       wind.textContent = `${data.currentConditions.windspeed} Km/s`;
 
-      // //databaase post
-      // fetch("/.netlify/functions/redis", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ locationName }),
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => console.log(data))
-      //   .catch((error) => console.error("Error:", error));
+      //databaase post
+      fetch("/.netlify/functions/redis", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ locationName }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error("Error:", error));
 
       // night mode and sun mode
       const Time = data.currentConditions.datetime.split(":");
@@ -123,12 +131,10 @@ const getWeatherDetails = async (locationName, lat, lon) => {
       }, []);
 
       const hoursAfterCurrent = allHoursData.slice(currentHour);
-
       const dateTimeArray = hoursAfterCurrent.map((hour) => hour.datetime);
       const dateTemp = hoursAfterCurrent.map((hour) => hour.temp);
       const dateIcon = hoursAfterCurrent.map((hour) => hour.icon);
       const hourElements = document.querySelectorAll(".idkss");
-      const tempElements = document.querySelectorAll(".temperature");
       const imageElements = document.querySelectorAll(".img_element");
 
       imageElements.forEach((imageElement, index) => {
@@ -138,9 +144,9 @@ const getWeatherDetails = async (locationName, lat, lon) => {
 
       tempElements.forEach((tempElement, index) => {
         const tempSpan = tempElement.querySelector("span");
-        if (tempSpan) {
-          tempSpan.textContent = `${dateTemp[index]}°C` || "";
-        }
+        const iconSpan = tempElement.querySelector(".hourly_temp__icon");
+        tempSpan.textContent = `${dateTemp[index]}` || "";
+        iconSpan.textContent = `°C`;
       });
 
       hourElements.forEach((hourElement, index) => {
@@ -170,13 +176,20 @@ const getWeatherDetails = async (locationName, lat, lon) => {
 
         dayElements[index].querySelector("span").textContent = dayName;
         dailyImg[index].src = `images/weather/${icons}.svg`;
-        dailyTemp[index].textContent = `${temp}°C`;
+        dailyTemp[index].textContent = `${temp}`;
+        console.log(element);
+        tempDailyElements.forEach((tempElement, index) => {
+          const iconSpan = tempElement.querySelector(".daily_temp__icon");
+          iconSpan.textContent = `°C`;
+        });
       });
     })
     .catch(() => {
       alert("an error has occurd");
       myImage.src = ``;
     });
+
+  tempButton.setAttribute("data-temp", "celcius");
 };
 
 function getCityCoords() {
@@ -218,8 +231,72 @@ function dropDown() {
   nightMode.style.display = "block";
 }
 
-searchBtn.addEventListener("click", getCityCoords);
+tempButton.addEventListener("click", () => {
+  const tempConvert = parseFloat(temp.textContent);
+  const dataTemp = tempButton.getAttribute("data-temp");
 
+  switch (dataTemp) {
+    case "fahrenheit":
+      tempElements.forEach((tempElement) => {
+        const tempSpan = tempElement.querySelector("span");
+        const iconSpan = tempElement.querySelector(".hourly_temp__icon");
+        const tempConvert = parseFloat(tempSpan.textContent);
+        const toFahrenheit = (((tempConvert - 32) * 5) / 9).toFixed(1);
+        tempSpan.textContent = removeTrailingZero(toFahrenheit);
+        iconSpan.textContent = "°C";
+      });
+
+      tempDailyElements.forEach((tempElement) => {
+        const tempSpan = tempElement.querySelector("span");
+        const iconSpan = tempElement.querySelector(".daily_temp__icon");
+        const tempConvert = parseFloat(tempSpan.textContent);
+        const toFahrenheit = (((tempConvert - 32) * 5) / 9).toFixed(1);
+        tempSpan.textContent = removeTrailingZero(toFahrenheit);
+        iconSpan.textContent = "°C";
+      });
+      break;
+
+    case "celcius":
+      tempElements.forEach((tempElement) => {
+        const tempSpan = tempElement.querySelector("span");
+        const iconSpan = tempElement.querySelector(".hourly_temp__icon");
+        const tempConvert = parseFloat(tempSpan.textContent);
+        const toCelcius = (tempConvert * 1.8 + 32).toFixed(1);
+        tempSpan.textContent = removeTrailingZero(toCelcius);
+        iconSpan.textContent = "°F";
+      });
+
+      tempDailyElements.forEach((tempElement) => {
+        const tempSpan = tempElement.querySelector("span");
+        const iconSpan = tempElement.querySelector(".daily_temp__icon");
+        const tempConvert = parseFloat(tempSpan.textContent);
+        const toCelcius = (tempConvert * 1.8 + 32).toFixed(1);
+        tempSpan.textContent = removeTrailingZero(toCelcius);
+        iconSpan.textContent = "°F";
+      });
+      break;
+  }
+
+  if (dataTemp === "fahrenheit") {
+    const toFahrenheit = (((tempConvert - 32) * 5) / 9).toFixed(1);
+    tempButton.setAttribute("data-temp", "celcius");
+    tempButton.textContent = " | °F";
+    tempIcon.textContent = `°C`;
+    temp.textContent = removeTrailingZero(toFahrenheit);
+  } else {
+    const toCelcius = ((tempConvert * 9) / 5 + 32).toFixed(1);
+    tempButton.setAttribute("data-temp", "fahrenheit");
+    tempButton.textContent = " | °C";
+    tempIcon.textContent = `°F`;
+    temp.textContent = removeTrailingZero(toCelcius);
+  }
+});
+
+function removeTrailingZero(value) {
+  return parseFloat(value).toString(); // Converts to string to remove trailing zeros
+}
+
+searchBtn.addEventListener("click", getCityCoords);
 themeBtn.addEventListener("click", toggleButton);
 searchBtn.addEventListener("click", dropDown);
 

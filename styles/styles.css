@@ -29,9 +29,6 @@ body {
 input {
   border: none;
 }
-.containerss {
-  display: flex;
-}
 
 .container-box {
   padding: 30px;
@@ -87,9 +84,8 @@ input {
   }
 }
 
-@media (max-width: 1200px) {
-  .containerss {
-  }
+.temp__button {
+  cursor: pointer;
 }
 
 @media (max-width: 300px) {
