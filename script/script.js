@@ -83,7 +83,12 @@ const getWeatherDetails = async (locationName, lat, lon) => {
       wind.textContent = `${windSpeedData} Km/s`;
 
       //databaase post
-      locationData = `${locationName} | ${weatherCondition} | ${temperatureData}°C | ${humidityData}% | ${windSpeedData}Km/s `;
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = today.getFullYear();
+      today = mm + "/" + dd + "/" + yyyy;
+      let locationData = `${today} | ${locationName} | Condition: ${weatherCondition} | Temperature: ${temperatureData}°C | Humidity: ${humidityData}% | Wind: ${windSpeedData}Km/s `;
       fetch("/.netlify/functions/redis", {
         method: "POST",
         headers: {
@@ -97,7 +102,6 @@ const getWeatherDetails = async (locationName, lat, lon) => {
         .catch((error) => console.error("Error:", error));
 
       // night mode and sun mode
-      console.log("location data: ", locationData);
       const Time = data.currentConditions.datetime.split(":");
 
       if (Time[0] >= 12 && Time[0] < 17) {
