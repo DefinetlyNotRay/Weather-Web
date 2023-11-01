@@ -70,27 +70,34 @@ const getWeatherDetails = async (locationName, lat, lon) => {
     .then((data) => {
       // Update the weather details on the webpage
       console.log(data);
+      weatherCondition = data.currentConditions.conditions;
+      temperatureData = data.currentConditions.temp;
+      humidityData = data.currentConditions.humidity;
+      windSpeedData = data.currentConditions.windspeed;
       name1.textContent = `${locationName}`;
       myImage.src = `images/weather/${data.currentConditions.icon}.svg`;
-      weatherDescription.textContent = data.currentConditions.conditions;
-      temp.textContent = `${data.currentConditions.temp}`;
+      weatherDescription.textContent = weatherCondition;
+      temp.textContent = `${temperatureData}`;
       tempIcon.textContent = ` °C`;
-      humidity.textContent = `${data.currentConditions.humidity}%`;
-      wind.textContent = `${data.currentConditions.windspeed} Km/s`;
+      humidity.textContent = `${humidityData}%`;
+      wind.textContent = `${windSpeedData} Km/s`;
 
       //databaase post
+      locationData = `${locationName} | ${weatherCondition} | ${temperatureData}°C | ${humidityData}% | ${windSpeedData}Km/s `;
       fetch("/.netlify/functions/redis", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ locationName }),
+
+        body: JSON.stringify({ locationData }),
       })
         .then((response) => response.json())
         .then((data) => console.log(data))
         .catch((error) => console.error("Error:", error));
 
       // night mode and sun mode
+      console.log("location data: ", locationData);
       const Time = data.currentConditions.datetime.split(":");
 
       if (Time[0] >= 12 && Time[0] < 17) {
