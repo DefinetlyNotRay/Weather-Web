@@ -22,109 +22,112 @@
     ></script>
   </head>
   <body>
-    <div>
-      <div class="container-box">
-        <div class="Search-box">
-          <input
-            placeholder="Enter Location"
-            class="location-input"
-            onkeydown="handleKeyDown(event)"
-          />
-          <button class="search-button" onclick="dropDown()">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
+    <div class="wrap">
 
-        <div class="data">
-          <div class="current-data">
-            <div class="data-details">
-              <h1 class="location-name">_________</h1>
-
-              <img class="img-element" id="myImage" src="" />
-
-              <p class="weather__Txt"></p>
+      <div>
+        <div class="container-box">
+          <div class="Search-box">
+            <input
+              placeholder="Enter Location"
+              class="location-input"
+              onkeydown="handleKeyDown(event)"
+            />
+            <button class="search-button" onclick="dropDown()">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+  
+          <div class="data">
+            <div class="current-data">
+              <div class="data-details">
+                <h1 class="location-name">_________</h1>
+  
+                <img class="img-element" id="myImage" src="" />
+  
+                <p class="weather__Txt"></p>
+            
+                  <p class="temperature">Temperature: <span class="temp"></span><span class="temp__icon"></span><span class="temp__button" data-temp="celcius"> | °F</span></p>
           
-                <p class="temperature">Temperature: <span class="temp"></span><span class="temp__icon"></span><span class="temp__button" data-temp="celcius"> | °F</span></p>
-        
-              <p class="wind">Wind: <span></span></p>
-              <p class="humidity">Humidity: <span></span></p>
-              <button class="theme-button1" id="theme-button">
-                <img
-                  class="imgSVG"
-                  id="toggle-night"
-                  src="svg/moon-regular.svg"
-                />
-              </button>
+                <p class="wind">Wind: <span></span></p>
+                <p class="humidity">Humidity: <span></span></p>
+                <button class="theme-button1" id="theme-button">
+                  <img
+                    class="imgSVG"
+                    id="toggle-night"
+                    src="svg/moon-regular.svg"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+  
+        <div class="dialy__hourly">
+          <div class="hourly__daily">
+            <div class="hourly__box">
+              <h2>HOURLY FORECAST</h2>
+              <div class="hourly__data">
+                <div class="hourly__datas">
+                  <div class="hourly__details">
+                    <div class="days">
+                      <p class="idkss one"><span></span></p>
+                      <p class="idkss one"><span></span></p>
+                      <p class="idkss one"><span></span></p>
+                      <p class="idkss one"><span></span></p>
+                      <p class="idkss one"><span></span></p>
+                    </div>
+                    <div class="daily__image">
+                      <img class="img_element daily" id="myImage1" src="" />
+                      <img class="img_element daily" id="myImage2" src="" />
+                      <img class="img_element daily" id="myImage3" src="" />
+                      <img class="img_element daily" id="myImage4" src="" />
+                      <img class="img_element daily" id="myImage5" src="" />
+                    </div>
+                    <div class="daily">
+                      <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
+                      <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
+                      <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
+                      <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
+                      <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="daily__box">
+              <h2>DAILY FORECAST</h2>
+              <div class="daily__data">
+                <div class="daily__datas">
+                  <div class="daily__details">
+                    <div class="days">
+                      <p class="day one"><span></span></p>
+                      <p class="day one"><span></span></p>
+                      <p class="day one"><span></span></p>
+                      <p class="day one"><span></span></p>
+                      <p class="day one"><span></span></p>
+                    </div>
+                    <div class="daily__image">
+                      <img class="img-daily one" id="myImage1" src="" />
+                      <img class="img-daily two" id="myImage2" src="" />
+                      <img class="img-daily three" id="myImage3" src="" />
+                      <img class="img-daily four" id="myImage4" src="" />
+                      <img class="img-daily five" id="myImage5" src="" />
+                    </div>
+                    <div class="daily">
+                      <p class="temp__dailies temperature__daily one"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
+                      <p class="temp__dailies temperature__daily two"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
+                      <p class="temp__dailies temperature__daily three"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
+                      <p class="temp__dailies temperature__daily four"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
+                      <p class="temp__dailies temperature__daily five"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
-
-      <div class="dialy__hourly">
-        <div class="hourly__daily">
-          <div class="hourly__box">
-            <h2>HOURLY FORECAST</h2>
-            <div class="hourly__data">
-              <div class="hourly__datas">
-                <div class="hourly__details">
-                  <div class="days">
-                    <p class="idkss one"><span></span></p>
-                    <p class="idkss one"><span></span></p>
-                    <p class="idkss one"><span></span></p>
-                    <p class="idkss one"><span></span></p>
-                    <p class="idkss one"><span></span></p>
-                  </div>
-                  <div class="daily__image">
-                    <img class="img_element daily" id="myImage1" src="" />
-                    <img class="img_element daily" id="myImage2" src="" />
-                    <img class="img_element daily" id="myImage3" src="" />
-                    <img class="img_element daily" id="myImage4" src="" />
-                    <img class="img_element daily" id="myImage5" src="" />
-                  </div>
-                  <div class="daily">
-                    <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
-                    <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
-                    <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
-                    <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
-                    <p class="temp__hourly temperature_daily"><span></span><span class="hourly_temp__icon"></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="daily__box">
-            <h2>DAILY FORECAST</h2>
-            <div class="daily__data">
-              <div class="daily__datas">
-                <div class="daily__details">
-                  <div class="days">
-                    <p class="day one"><span></span></p>
-                    <p class="day one"><span></span></p>
-                    <p class="day one"><span></span></p>
-                    <p class="day one"><span></span></p>
-                    <p class="day one"><span></span></p>
-                  </div>
-                  <div class="daily__image">
-                    <img class="img-daily one" id="myImage1" src="" />
-                    <img class="img-daily two" id="myImage2" src="" />
-                    <img class="img-daily three" id="myImage3" src="" />
-                    <img class="img-daily four" id="myImage4" src="" />
-                    <img class="img-daily five" id="myImage5" src="" />
-                  </div>
-                  <div class="daily">
-                    <p class="temp__dailies temperature__daily one"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
-                    <p class="temp__dailies temperature__daily two"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
-                    <p class="temp__dailies temperature__daily three"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
-                    <p class="temp__dailies temperature__daily four"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
-                    <p class="temp__dailies temperature__daily five"><span class="plswork"></span><span class="daily_temp__icon"></span></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

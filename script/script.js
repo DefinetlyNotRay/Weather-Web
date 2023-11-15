@@ -219,11 +219,17 @@ function getCityCoords() {
         temperature.textContent = ``;
         humidity.textContent = ``;
         wind.textContent = ``;
+        const daily__hourly = document.querySelector(".dialy__hourly");
+
+        // Remove classes first
         dataDetails.classList.remove("height");
         nightMode.style.display = "none";
         dataDaily.classList.remove("show");
         dataHourly.classList.remove("show");
         document.body.classList.remove("night");
+        setTimeout(function () {
+          daily__hourly.style.display = "none";
+        }, 950);
       }
       const { name, lat, lon } = data[0];
       getWeatherDetails(name, lat, lon);
@@ -236,9 +242,16 @@ function getCityCoords() {
 console.log(getCityCoords);
 
 function dropDown() {
-  dataDaily.classList.add("show");
-  dataHourly.classList.add("show");
-  dataDetails.classList.add("height");
+  const daily__hourly = document.querySelector(".dialy__hourly");
+  daily__hourly.style.display = "flex";
+
+  // Set a delay using setTimeout
+  setTimeout(function () {
+    dataDaily.classList.add("show");
+    dataHourly.classList.add("show");
+    dataDetails.classList.add("height");
+  }, 0);
+
   nightMode.style.display = "block";
 }
 
